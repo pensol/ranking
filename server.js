@@ -95,7 +95,6 @@ app.get('/getRanking', async (req, res) => {
         </body>
       </html>
     `;
-
     res.send(rankingHtml);
   } catch (err) {
     console.error('ランキング取得エラー:', err);
@@ -103,13 +102,10 @@ app.get('/getRanking', async (req, res) => {
   }
 });
 
-
 app.get("/alluser", async (req, res) => {
   try {
 
     const basicData = await Data.find().sort({ time: 1 });//timeを早い順から表示 
-
-
 
     // HTML形式のランキンmoグを生成
     const rankingHtml = `
@@ -145,8 +141,7 @@ app.get("/alluser", async (req, res) => {
                   <p class="description">${data.description ? `٩(ˊᗜˋ*)و <${data.description}` : ""}</p>
                 </li>
                 </hr class="hr">
-                
-              `
+                              `
     ).join("")}
           </ul>
         </div>
@@ -162,9 +157,6 @@ app.get("/alluser", async (req, res) => {
     return res.status(500)
   }
 })
-
-
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
