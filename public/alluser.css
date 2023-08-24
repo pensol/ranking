@@ -1,0 +1,91 @@
+.ranking-item{
+    display: flex;
+}
+
+/* ranking.css */
+
+/* ページ全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ヘッダーのスタイル */
+  h1 {
+    text-align: center;
+    padding: 20px;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(55, 55, 55, 1) 48%, rgba(124, 124, 124, 1) 100%);
+    color: #fff;
+    margin: 0;
+  }
+
+  
+
+  .nav{
+    display: flex;
+  }
+
+  .nav-item{
+    margin-right: 40px;
+    margin-left: 30px;
+  }
+
+  .nav-item a{
+    text-decoration: none;
+    color: black;
+    display: block;
+    background: white;
+    border: 1px solid black;
+    padding: 20px 40px;
+    border-radius: 50px;
+  }
+
+
+.hr{
+    color: black;
+}
+
+
+.ranking-list{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.ranking-item{
+    align-items: center;
+}
+
+.ranking-item .rank{
+    border: 1px solid black;
+    padding: 10px;
+    margin-right: 30px;
+}
+
+.ranking-item .username{
+    width: 400px;
+
+}
+
+.ranking-item .className{
+    width: 40px;
+}
+
+.ranking-item .time{
+    width: 100px;
+    margin-right: 40px;
+}
+
+.ranking-item .discription{
+    width: 200px;
+}
+
+.ranking-item .club{
+    width: 200px;
+}
+
+

@@ -1,41 +1,117 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ランキングデータ入力フォーム</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-  <h1>ランキングデータ入力フォーム</h1>
-  <form id="rankingForm">
-    <label for="username">ユーザーネーム:</label>
-    <input type="text" id="username" name="username" required><br>
-    <label for="time">タイム:</label>
-    <input type="text" id="time" name="time" required><br>
-    <button type="submit">データを送信</button>
-  </form>
+
+  <div class="credential_screen">
+    <div class="credential_container">
+      <div class="hero">
+        <h3>ようこそ！</h3>
+        <p>ランキングの登録には管理者用パスワードが必要です</p>
+      </div>
+      <form action="" class="credential_form">
+        <input type="password" id="password" name="password" placeholder="管理者パスワード">
+        <p class="error_text"></p>
+        <button type="submit" class="credential_submit">認証</button>
+      </form>
+      <p class="navigation">ランキングの閲覧は<span><a href="/getRanking">こちら</a></span></p>
+    </div>
+  </div>
+
+  <div class="register_screen disabled">
+    <div class="container">
+      <h1>ランキングデータ入力フォーム</h1>
+      <br>
+      <form id="rankingForm">
+        <label for="username">ユーザーネーム</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="className">学年とクラス</label>
+        <input type="text" id="className" name="className" required><br>
+        <label for="description">一言を残す</label>
+        <input type="text" id="description" name="description" required><br>
+        <label for="club">部門名</label>
+        <input type="text" id="club" name="club" required><br>
+        <label for="time">タイム</label>
+        <input type="number" step="0.01" id="time" name="time" required><br>
+        <button type="submit">データを送信</button>
+      </form>
+      <hr>
+      <button class="showRanking">ランキングを見る</button>
+    </div>
+  </div>
 
   <script>
+
+    //credential
+    const HASHED456 = "drone2023"; //脆弱でごめん
+
+    const credential_form = document.querySelector(".credential_form");
+    const register_screen = document.querySelector(".register_screen");
+    const credential_screen = document.querySelector(".credential_screen");
+    const error_text = document.querySelector(".error_text");
+    credential_form.addEventListener("submit",(e)=>{
+      e.preventDefault();
+
+      const password = credential_form.password.value;
+
+      if(password === HASHED456){
+        //パスワードが合っているときの処理
+        console.log("認証成功");
+
+        credential_screen.classList.add("disabled");
+        register_screen.classList.remove("disabled");
+        
+
+
+      }else{
+        //パスワードが間違っている時の処理
+        error_text.innerHTML="<p>不正なパスワード</p>"
+      }
+    })
+
+
+
+////////////////////////////////////
     const form = document.getElementById('rankingForm');
+    const button = document.querySelector(".showRanking");
+
+    button.addEventListener("click", () => {
+      window.location.href = "/getRanking";
+    })
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const username = form.username.value;
+      const className = form.className.value;
       const time = form.time.value;
+      const description = form.description.value;
+      const club = form.club.value;
 
       const response = await fetch('/saveData', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ username, time })
+        body: JSON.stringify({ username, time, description, club ,className})
       });
 
       const result = await response.text();
       console.log(result);
+
+      window.location.href="/getRanking";
     });
   </script>
 </body>
+
 </html>
